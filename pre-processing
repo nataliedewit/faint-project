@@ -1,0 +1,233 @@
+
+os.chdir("D:/DC")
+os.getcwd()
+
+X_train = []
+
+df = pd.read_csv("data_thesis.csv", sep = ";", dtype = np.int32)
+for row_number in range(952,1308):    
+    row =df.loc[row_number]
+    tp = row.iloc[1]
+    if tp == 1:
+        p = row.iloc[0]
+        p1a = str(p) + "/" + str(p) + "-01.MOV"
+        p1b = str(p) + "/" + str(p) + "_01.MOV"
+        if os.path.exists(p1a) == True:
+            vid = cv2.VideoCapture(p1a)
+        elif os.path.exists(p1b) == True:
+            vid = cv2.VideoCapture(p1b)
+        frame_width = int(vid.get(3))
+        frame_height = int(vid.get(4))
+        fps = vid.get(5)
+        frame_count = vid.get(7)
+        out = cv2.VideoWriter("video" + str(p) + "_" + str(tp) + ".MOV" ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 5, (frame_width, frame_height))
+        count = 0
+        while(vid.isOpened()):
+            count +=1
+            ret, frame = vid.read()
+            if ret == True:
+                if count >= (frame_count - (45*fps)):
+                    if count%5 == 0:
+                        out.write(frame)
+            else: break
+        out.release()
+    elif tp ==2:
+        p = row.iloc[0]
+        p2a = str(p) + "/" + str(p) + "-02.MOV"
+        p2b = str(p) + "/" + str(p) + "_02.MOV"
+        if os.path.exists(p2a) == True:
+            vid = cv2.VideoCapture(p2a)
+        elif os.path.exists(p2b) == True:
+            vid = cv2.VideoCapture(p2b)
+        fps = vid.get(5)
+        frame_count = vid.get(7)
+        frame_width = int(vid.get(3))
+        frame_height = int(vid.get(4))
+        out = cv2.VideoWriter("video" +str(p) + "_" + str(tp) + ".MOV" ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 5, (frame_width, frame_height))
+        count = 0
+        while(vid.isOpened()):
+            count +=1
+            ret, frame = vid.read()
+            if ret == True:
+                if count >= (frame_count - (45*fps)):
+                    if count%5 == 0:       
+                        out.write(frame)
+            else: break
+        out.release()
+        
+    elif tp == 3:
+        p = row.iloc[0]
+        p3a = str(p) + "/" + str(p) + "-03,04,05,06.MOV"
+        p3b = str(p) + "/" + str(p) + "-03-04-05-06.MOV"
+        p3c = str(p) + "/" + str(p) + "_03,04,05,06.MOV"
+        p3d = str(p) + "/" + str(p) + "-04,05,06.MOV"
+        p3e = str(p) + "/" + str(p) + "-04-05-06.MOV"
+        p3f = str(p) + "/" + str(p) + "_04,05,06.MOV"
+        p3g = str(p) + "/" + str(p) + "-03.MOV"
+        if os.path.exists(p3a) == True:
+            vid = cv2.VideoCapture(p3a)
+        elif os.path.exists(p3b) == True:
+            vid = cv2.VideoCapture(p3b)
+        elif os.path.exists(p3c) == True:
+            vid = cv2.VideoCapture(p3c)
+        elif os.path.exists(p3d) == True:
+            vid = cv2.VideoCapture(p3d)
+        elif os.path.exists(p3e) == True:
+            vid = cv2.VideoCapture(p3e)
+        elif os.path.exists(p3f) == True:
+            vid = cv2.VideoCapture(p3f)
+        elif os.path.exists(p3g) == True:
+            vid = cv2.VideoCapture(p3g)
+        fps = vid.get(5)
+        frame_count = vid.get(7)
+        frame_width = int(vid.get(3))
+        frame_height = int(vid.get(4))
+        out = cv2.VideoWriter("video" + str(p) + "_" + str(tp) + ".MOV" ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 5, (frame_width, frame_height))
+        count = 0
+        while(vid.isOpened()):
+            count +=1
+            ret, frame = vid.read()
+            if ret == True:
+                if count >= row.iloc[3]*25 and count <= (row.iloc[3]*25 + (45*25)):
+                    if count%5 == 0:     
+                        out.write(frame)
+                if count > (row.iloc[3]*25 + (45*25)):
+                    break
+            else: break
+        out.release()    
+    elif tp == 4:
+        p = row.iloc[0]
+        p4a = str(p) + "/" + str(p) + "-03,04,05,06.MOV"
+        p4b = str(p) + "/" + str(p) + "-03-04-05-06.MOV"
+        p4c = str(p) + "/" + str(p) + "_03,04,05,06.MOV"
+        p4d = str(p) + "/" + str(p) + "-04,05,06.MOV"
+        p4e = str(p) + "/" + str(p) + "-04-05-06.MOV"
+        p4f = str(p) + "/" + str(p) + "_04,05,06.MOV"
+        if os.path.exists(p4a) == True:
+            vid = cv2.VideoCapture(p4a)
+        elif os.path.exists(p4b) == True:
+            vid = cv2.VideoCapture(p4b)
+        elif os.path.exists(p4c) == True:
+            vid = cv2.VideoCapture(p4c)
+        elif os.path.exists(p4d) == True:
+            vid = cv2.VideoCapture(p4d)
+        elif os.path.exists(p4e) == True:
+            vid = cv2.VideoCapture(p4e)
+        elif os.path.exists(p4f) == True:
+            vid = cv2.VideoCapture(p4f)
+        fps = vid.get(5)
+        frame_count = vid.get(7)
+        frame_width = int(vid.get(3))
+        frame_height = int(vid.get(4))
+        out = cv2.VideoWriter("video" + str(p) + "_" + str(tp) + ".MOV" ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 5, (frame_width, frame_height))
+        count = 0
+        while(vid.isOpened()):
+            count +=1
+            ret, frame = vid.read()
+            if ret == True:
+                if count >= row.iloc[3]*25 and count <= (row.iloc[3]*25 + (45*25)):
+                    if count%5 == 0: 
+                        out.write(frame)
+                if count > (row.iloc[3]*25 + (45*25)):
+                    break
+            else: break
+        out.release()        
+    elif tp == 5:
+        p = row.iloc[0]
+        p5a = str(p) + "/" + str(p) + "-03,04,05,06.MOV"
+        p5b = str(p) + "/" + str(p) + "-03-04-05-06.MOV"
+        p5c = str(p) + "/" + str(p) + "_03,04,05,06.MOV"
+        p5d = str(p) + "/" + str(p) + "-04,05,06.MOV"
+        p5e = str(p) + "/" + str(p) + "-04-05-06.MOV"
+        p5f = str(p) + "/" + str(p) + "_04,05,06.MOV"
+        if os.path.exists(p5a) == True:
+            vid = cv2.VideoCapture(p5a)
+        elif os.path.exists(p5b) == True:
+            vid = cv2.VideoCapture(p5b)
+        elif os.path.exists(p5c) == True:
+            vid = cv2.VideoCapture(p5c)
+        elif os.path.exists(p5d) == True:
+            vid = cv2.VideoCapture(p5d)
+        elif os.path.exists(p5e) == True:
+            vid = cv2.VideoCapture(p5e)
+        elif os.path.exists(p5f) == True:
+            vid = cv2.VideoCapture(p5f)
+        fps = vid.get(5)
+        frame_count = vid.get(7)
+        frame_width = int(vid.get(3))
+        frame_height = int(vid.get(4))
+        out = cv2.VideoWriter("video" + str(p) + "_" + str(tp) + ".MOV" ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 5, (frame_width, frame_height))
+        count = 0
+        while(vid.isOpened()):
+            count +=1
+            ret, frame = vid.read()
+            if ret == True:
+                if count >= row.iloc[3]*25 and count <= (row.iloc[3]*25 + (45*25)):
+                    if count%5 == 0: 
+                        out.write(frame)
+                if count > (row.iloc[3]*25 + (45*25)):
+                    break
+            else: break
+        out.release()                                
+    elif tp == 6:
+        p = row.iloc[0]
+        p6a = str(p) + "/" + str(p) + "-03,04,05,06.MOV"
+        p6b = str(p) + "/" + str(p) + "-03-04-05-06.MOV"
+        p6c = str(p) + "/" + str(p) + "_03,04,05,06.MOV"
+        p6d = str(p) + "/" + str(p) + "-04,05,06.MOV"
+        p6e = str(p) + "/" + str(p) + "-04-05-06.MOV"
+        p6f = str(p) + "/" + str(p) + "_04,05,06.MOV"
+        if os.path.exists(p6a) == True:
+            vid = cv2.VideoCapture(p6a)
+        elif os.path.exists(p6b) == True:
+            vid = cv2.VideoCapture(p6b)
+        elif os.path.exists(p6c) == True:
+            vid = cv2.VideoCapture(p6c)
+        elif os.path.exists(p6d) == True:
+            vid = cv2.VideoCapture(p6d)
+        elif os.path.exists(p6e) == True:
+            vid = cv2.VideoCapture(p6e)
+        elif os.path.exists(p6f) == True:
+            vid = cv2.VideoCapture(p6f)
+        fps = vid.get(5)
+        frame_count = vid.get(7)
+        frame_width = int(vid.get(3))
+        frame_height = int(vid.get(4))
+        out = cv2.VideoWriter("video" + str(p) + "_" + str(tp) + ".MOV" ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 5, (frame_width, frame_height))
+        count = 0
+        while(vid.isOpened()):
+            count +=1
+            ret, frame = vid.read()
+            if ret == True:
+                if count >= row.iloc[3]*25 and count <= (row.iloc[3]*25 + (45*25)):
+                    if count%5 == 0: 
+                        out.write(frame)
+                if count > (row.iloc[3]*25 + (45*25)):
+                    break
+            else: break
+        out.release()                                        
+    elif tp ==7:
+        p = row.iloc[0]
+        p7a = str(p) + "/" + str(p) + "-07.MOV"
+        p7b = str(p) + "/" + str(p) + "_07.MOV"
+        if os.path.exists(p7a) == True:
+            vid = cv2.VideoCapture(p7a)
+        elif os.path.exists(p7b) == True:
+            vid = cv2.VideoCapture(p7b)
+        fps = vid.get(5)
+        frame_count = vid.get(7)
+        frame_width = int(vid.get(3))
+        frame_height = int(vid.get(4))
+        out = cv2.VideoWriter("video" + str(p) + "_" + str(tp) + ".MOV" ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 5, (frame_width, frame_height))
+        count = 0
+        while(vid.isOpened()):
+            count +=1
+            ret, frame = vid.read()
+            if ret == True:
+                if count >= (frame_count - (45*fps)):
+                    if count%5 == 0:       
+                        out.write(frame)
+            else: break
+        out.release()                        
+
+        
