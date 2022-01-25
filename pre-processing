@@ -1,8 +1,6 @@
 
-os.chdir("D:/DC")
-os.getcwd()
+# The purpose of this code is to read all video files, extract 45 seconds and reduce the frames per second to 5, and write these videos as new files.
 
-X_train = []
 
 df = pd.read_csv("data_thesis.csv", sep = ";", dtype = np.int32)
 for row_number in range(952,1308):    
